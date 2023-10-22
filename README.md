@@ -1,5 +1,33 @@
 # Carpool Frontend
 
+## Team of the project
+<div align="center">
+  <h3>Meet the Team</h3>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/username1">
+          <img src="https://avatars.githubusercontent.com/X9Yovix" width="100" height="100" alt="Contributor 1"><br />
+          <sub><b>Karim Ouazzou</b></sub>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/username2">
+          <img src="https://avatars.githubusercontent.com/username2" width="100" height="100" alt="Contributor 2"><br />
+          <sub><b>Contributor 2</b></sub>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/username3">
+          <img src="https://avatars.githubusercontent.com/username3" width="100" height="100" alt="Contributor 3"><br />
+          <sub><b>Contributor 3</b></sub>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
 ## Installation
 1. Install Node.js
 
