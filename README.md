@@ -13,14 +13,14 @@
       </td>
       <td align="center">
         <a href="https://github.com/username2">
-          <img src="https://avatars.githubusercontent.com/username2" width="100" height="100" alt="Contributor 2"><br />
-          <sub><b>Contributor 2</b></sub>
+          <img src="https://avatars.githubusercontent.com/nada203123" width="100" height="100" alt="Contributor 2"><br />
+          <sub><b>Nada Ghribi</b></sub>
         </a>
       </td>
       <td align="center">
         <a href="https://github.com/username3">
-          <img src="https://avatars.githubusercontent.com/username3" width="100" height="100" alt="Contributor 3"><br />
-          <sub><b>Contributor 3</b></sub>
+          <img src="https://avatars.githubusercontent.com/yassineraddaoui" width="100" height="100" alt="Contributor 3"><br />
+          <sub><b>Yassine Raddaoui</b></sub>
         </a>
       </td>
     </tr>
