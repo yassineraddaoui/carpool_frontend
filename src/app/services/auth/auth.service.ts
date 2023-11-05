@@ -9,7 +9,7 @@ import { RegisterRequest } from 'src/app/models/RegisterRequest';
   providedIn: 'root'
 })
 export class AuthService {
-  endpoint: string = 'http://localhost:8089/api';
+  endpoint: string = 'http://localhost:8089/api/auth';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
@@ -31,11 +31,12 @@ export class AuthService {
         localStorage.setItem('role', res.role);
         localStorage.setItem('first-name', res.firstName);
         localStorage.setItem('last-name', res.lastName);
-        if(res.role=='ROLE_USER')
+        console.log(res.role);
+        if(res.role=='PASSENGER')
           this.router.navigateByUrl('/user');
-        else if(res.role=='ROLE_Driver')
+        else if(res.role=='DRIVER')
           this.router.navigateByUrl('/driver');
-        else
+        else if(res.role='ADMIN')
           this.router.navigateByUrl('/admin');
       });
   }

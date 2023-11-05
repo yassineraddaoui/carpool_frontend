@@ -16,19 +16,19 @@ const routes: Routes = [
     path: 'admin', component: AdminDashboardComponent,
     canActivate: [AuthGuard],
     data: {
-      role: 'ROLE_ADMIN'
+      role: 'ADMIN'
     }
   },
   { path: 'driver', component: DriverDashboardComponent,
   canActivate: [AuthGuard],
   data: {
-    role: 'ROLE_Driver'
+    role: 'DRIVER'
   }
 },
   { path: 'user', component: UserDashboardComponent,
     canActivate: [AuthGuard],
     data: {
-      role: 'ROLE_USER'
+      role: 'PASSENGER'
     }
   },
   { path: '**', component: NotFoundComponent }
