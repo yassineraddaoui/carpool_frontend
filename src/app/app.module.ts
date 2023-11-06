@@ -9,13 +9,15 @@ import { AuthInterceptor } from './components/shareed/auth.interceptor';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
+import { ReactiveFormsModule } from '@angular/forms';
+import { CheckEmailComponent } from './components/shareed/CheckEmail/check-email/check-email.component'; // Import ReactiveFormsModule
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    CheckEmailComponent,
   ],
   imports: [
     BrowserModule,

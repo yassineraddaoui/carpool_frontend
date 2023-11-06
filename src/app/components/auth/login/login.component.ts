@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
   }
   
   onLogin(){
-    console.log(new LoginRequest(this.userForm.value['email'],this.userForm.value['password']))
     this.authservice.login(new LoginRequest(this.userForm.value['email'],this.userForm.value['password']));
   }
 

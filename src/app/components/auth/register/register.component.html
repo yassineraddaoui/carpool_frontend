@@ -1,1 +1,32 @@
-<p>register works!</p>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+        <label for="firstName" class="form-label">First Name</label>
+        <input formControlName="firstName" type="text" class="form-control" id="firstName" placeholder="Enter your first name">
+    </div>
+
+    <div class="mb-3">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input formControlName="lastName" type="text" class="form-control" id="lastName" placeholder="Enter your last name">
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter your email">
+    </div>
+
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input formControlName="password" type="password" class="form-control" id="password" placeholder="Enter your password">
+    </div>
+
+    <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <select formControlName="role" class="form-select" id="role">
+            <option value="" disabled selected>Select role</option>
+            <option value="PASSENGER">Passenger</option>
+            <option value="DRIVER">Driver</option>
+        </select>
+    </div>
+
+    <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary">Submit</button>
+</form>

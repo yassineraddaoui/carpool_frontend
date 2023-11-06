@@ -11,34 +11,46 @@ import { RegisterRequest } from 'src/app/models/RegisterRequest';
 export class AuthService {
   endpoint: string = 'http://localhost:8089/api/auth';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser = {};
 
-  constructor(private http: HttpClient, public router: Router ) {}
+  constructor(private http: HttpClient, public router: Router) { }
 
-  getRole(){
-    return localStorage.getItem('role');
+  getRole() {
+    const token = this.getToken();
+    if (token) {
+      let jwtData = token.split('.')[1];
+      let decodedJwtJsonData = window.atob(jwtData);
+      let decodedJwtData = JSON.parse(decodedJwtJsonData);
+      return decodedJwtData.ROLES ;
+    } else {
+      console.error("Token is null.");
+      return null; 
+    }
+
   }
-  register(user: RegisterRequest): Observable<any> {
+  register(user: RegisterRequest) {
     let api = `${this.endpoint}/register`;
-    return this.http.post(api, user).pipe(catchError(this.handleError));
+    console.log(user);
+    return this.http.post(api, user).subscribe({
+      next:(res)=>this.router.navigateByUrl('/checkemail'),
+      error: this.handleError.bind(this) //
+   });
   }
   // Sign-in  
-  login(user: LoginRequest  ) {
+  login(user: LoginRequest) {
     return this.http
       .post<any>(`${this.endpoint}/login`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.token);
-        localStorage.setItem('role', res.role);
         localStorage.setItem('first-name', res.firstName);
         localStorage.setItem('last-name', res.lastName);
-        console.log(res.role);
-        if(res.role=='PASSENGER')
+        if (this.getRole() == 'PASSENGER')
           this.router.navigateByUrl('/user');
-        else if(res.role=='DRIVER')
+        else if (this.getRole() == 'DRIVER')
           this.router.navigateByUrl('/driver');
-        else if(res.role='ADMIN')
+        else if (this.getRole() == 'ADMIN')
           this.router.navigateByUrl('/admin');
-      });
+      }
+      );
   }
   getToken() {
     return localStorage.getItem('access_token');
@@ -48,7 +60,10 @@ export class AuthService {
     return authToken !== null ? true : false;
   }
   doLogout() {
-    let removeToken = localStorage.removeItem('access_token');
+    const removeToken = localStorage.removeItem('access_token');
+    localStorage.removeItem('first-name');
+    localStorage.removeItem('last-name');
+
     if (removeToken == null) {
       this.router.navigateByUrl('/login');
     }
