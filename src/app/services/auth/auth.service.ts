@@ -1,9 +1,11 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import {  throwError } from 'rxjs';
 import { LoginRequest } from 'src/app/models/LoginRequest';
 import { RegisterRequest } from 'src/app/models/RegisterRequest';
+import {ResetPasswordRequest} from "../../models/ResetPasswordRequest";
+import {ForgotPasswordRequest} from "../../models/ForgotPasswordRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,7 @@ export class AuthService {
       return decodedJwtData.ROLES ;
     } else {
       console.error("Token is null.");
-      return null; 
+      return null;
     }
 
   }
@@ -35,7 +37,7 @@ export class AuthService {
       error: this.handleError.bind(this) //
    });
   }
-  // Sign-in  
+  // Sign-in
   login(user: LoginRequest) {
     return this.http
       .post<any>(`${this.endpoint}/login`, user)
@@ -43,31 +45,45 @@ export class AuthService {
         localStorage.setItem('access_token', res.token);
         localStorage.setItem('first-name', res.firstName);
         localStorage.setItem('last-name', res.lastName);
-        if (this.getRole() == 'PASSENGER')
-          this.router.navigateByUrl('/user');
-        else if (this.getRole() == 'DRIVER')
-          this.router.navigateByUrl('/driver');
-        else if (this.getRole() == 'ADMIN')
-          this.router.navigateByUrl('/admin');
+        this.navigate();
       }
       );
+  }
+  navigate(){
+    if (this.getRole() == 'PASSENGER')
+      this.router.navigateByUrl('/user');
+    else if (this.getRole() == 'DRIVER')
+      this.router.navigateByUrl('/driver');
+    else if (this.getRole() == 'ADMIN')
+      this.router.navigateByUrl('/admin');
+  }
+  forgotPassword(forgotPasswordRequest:ForgotPasswordRequest){
+    return this.http.post<string>(`${this.endpoint}/forgot-password`,forgotPasswordRequest)
+      .subscribe(res =>{
+        console.log(res);
+    });
+  }
+  resetPassword(resetToken:string,resetPasswordRequest:ResetPasswordRequest){
+    return this.http.patch<any>(`${this.endpoint}/reset-password/${resetToken}`,resetPasswordRequest)
+      .subscribe(res =>{
+        this.router.navigateByUrl('/login');
+        console.log(res);
+      });
   }
   getToken() {
     return localStorage.getItem('access_token');
   }
   get isLoggedIn(): boolean {
     let authToken = localStorage.getItem('access_token');
-    return authToken !== null ? true : false;
+    return authToken !== null;
   }
   doLogout() {
-    const removeToken = localStorage.removeItem('access_token');
+    localStorage.removeItem('access_token');
     localStorage.removeItem('first-name');
     localStorage.removeItem('last-name');
-
-    if (removeToken == null) {
-      this.router.navigateByUrl('/login');
-    }
+    this.router.navigateByUrl('/login');
   }
+
   // Error
   handleError(error: HttpErrorResponse) {
     let msg = '';

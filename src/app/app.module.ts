@@ -10,7 +10,9 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CheckEmailComponent } from './components/shareed/CheckEmail/check-email/check-email.component'; // Import ReactiveFormsModule
+import { CheckEmailComponent } from './components/auth/check-email/check-email.component';
+import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
+import {ForgotPasswordComponent} from "./components/auth/forgot-password/forgot-password.component"; // Import ReactiveFormsModule
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { CheckEmailComponent } from './components/shareed/CheckEmail/check-email
     LoginComponent,
     RegisterComponent,
     CheckEmailComponent,
+    ResetPasswordComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
