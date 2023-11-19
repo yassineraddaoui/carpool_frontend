@@ -13,6 +13,8 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.authservice.getToken())
+      this.authservice.navigate();
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
