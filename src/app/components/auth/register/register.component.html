@@ -19,14 +19,20 @@
         <input formControlName="password" type="password" class="form-control" id="password" placeholder="Enter your password">
     </div>
 
-    <div class="mb-3">
-        <label for="role" class="form-label">Role</label>
-        <select formControlName="role" class="form-select" id="role">
-            <option value="" disabled selected>Select role</option>
-            <option value="PASSENGER">Passenger</option>
-            <option value="DRIVER">Driver</option>
-        </select>
+  <div class="mb-3">
+    <label class="form-label">Role</label>
+
+    <div class="form-check">
+      <input type="checkbox"  id="passenger" (change)="onCheckboxChange($event)" class="form-check-input" value="PASSENGER">
+      <label for="passenger" class="form-check-label">Passenger</label>
     </div>
+
+    <div class="form-check">
+      <input type="checkbox"  id="driver" (change)="onCheckboxChange($event)" class="form-check-input" value="DRIVER">
+      <label for="driver" class="form-check-label">Driver</label>
+    </div>
+  </div>
+
 
     <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary">Submit</button>
 </form>
