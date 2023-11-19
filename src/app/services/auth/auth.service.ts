@@ -17,19 +17,30 @@ export class AuthService {
 
   constructor(private toastrService :ToastrService,private http: HttpClient, public router: Router) { }
 
-  getRole() {
+  getRoles() {
     const token = this.getToken();
     if (token) {
-      let jwtData = token.split('.')[1];
-      let decodedJwtJsonData = window.atob(jwtData);
-      let decodedJwtData = JSON.parse(decodedJwtJsonData);
-      return decodedJwtData.ROLES ;
+      try {
+        const jwtData = token.split('.')[1];
+        const decodedJwtJsonData = window.atob(jwtData);
+        const decodedJwtData = JSON.parse(decodedJwtJsonData);
+
+        if (decodedJwtData && decodedJwtData.roles) {
+          return decodedJwtData.roles;
+        } else {
+          console.error("Roles not found in decoded JWT data.");
+          return null;
+        }
+      } catch (error) {
+        console.error("Error decoding JWT:", error);
+        return null;
+      }
     } else {
       console.error("Token is null.");
       return null;
     }
-
   }
+
   register(user: RegisterRequest) {
     let api = `${this.endpoint}/register`;
     console.log(user);
@@ -50,25 +61,28 @@ export class AuthService {
       .post<any>(`${this.endpoint}/login`, user)
       .subscribe({
         next: (res) => {
-          localStorage.setItem('access_token', res.token);
-          localStorage.setItem('first-name', res.firstName);
-          localStorage.setItem('last-name', res.lastName);
-          this.toastrService.success(res.message);
-          this.navigate();
-        },
+          if(res.token) {
+            localStorage.setItem('access_token', res.token);
+            localStorage.setItem('first-name', res.firstName);
+            localStorage.setItem('last-name', res.lastName);
+            this.toastrService.success(res.message);
+            this.navigate();
+          }
+          },
         error: (err) => {
           this.toastrService.error("An error occurred");
-
         }
       });
   }
 
   navigate(){
-    if (this.getRole() == 'PASSENGER')
+    console.log(this.getRoles())
+    if (this.getRoles().indexOf('PASSENGER') !=-1)
       this.router.navigateByUrl('/user');
-    else if (this.getRole() == 'DRIVER')
+
+    else if (this.getRoles().indexOf('DRIVER')!=-1)
       this.router.navigateByUrl('/driver');
-    else if (this.getRole() == 'ADMIN')
+    else if (this.getRoles().indexOf('ADMIN')!=-1)
       this.router.navigateByUrl('/admin');
   }
 
