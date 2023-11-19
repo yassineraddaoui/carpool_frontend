@@ -12,7 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CheckEmailComponent } from './components/auth/check-email/check-email.component';
 import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
-import {ForgotPasswordComponent} from "./components/auth/forgot-password/forgot-password.component"; // Import ReactiveFormsModule
+import {ForgotPasswordComponent} from "./components/auth/forgot-password/forgot-password.component";
+import {ToastrModule} from "ngx-toastr"; // Import ReactiveFormsModule
 
 @NgModule({
   declarations: [
@@ -21,9 +22,11 @@ import {ForgotPasswordComponent} from "./components/auth/forgot-password/forgot-
     RegisterComponent,
     CheckEmailComponent,
     ResetPasswordComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+
   ],
   imports: [
+    ToastrModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

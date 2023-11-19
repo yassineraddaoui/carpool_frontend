@@ -19,8 +19,11 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
   }
-  
+
   onLogin(){
+    if (this.userForm.invalid) {
+      return;
+    }
     this.authservice.login(new LoginRequest(this.userForm.value['email'],this.userForm.value['password']));
   }
 

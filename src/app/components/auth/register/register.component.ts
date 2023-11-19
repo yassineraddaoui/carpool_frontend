@@ -21,6 +21,11 @@ export class RegisterComponent implements OnInit{
     });  }
     registerForm!: FormGroup;
     onSubmit(){
-    this.authservice.register(new RegisterRequest(this.registerForm.value['firstName'],this.registerForm.value['lastName'],this.registerForm.value['email'],this.registerForm.value['password'],this.registerForm.value['role']));
+      if (this.registerForm.invalid) {
+        return;
+      }
+      let roles=[];
+      roles.push(this.registerForm.value['role']);
+    this.authservice.register(new RegisterRequest(this.registerForm.value['firstName'],this.registerForm.value['lastName'],this.registerForm.value['email'],this.registerForm.value['password'],roles));
   }
 }

@@ -6,6 +6,7 @@ import { LoginRequest } from 'src/app/models/LoginRequest';
 import { RegisterRequest } from 'src/app/models/RegisterRequest';
 import {ResetPasswordRequest} from "../../models/ResetPasswordRequest";
 import {ForgotPasswordRequest} from "../../models/ForgotPasswordRequest";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   endpoint: string = 'http://localhost:8089/api/auth';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private http: HttpClient, public router: Router) { }
+  constructor(private toastrService :ToastrService,private http: HttpClient, public router: Router) { }
 
   getRole() {
     const token = this.getToken();
@@ -32,23 +33,36 @@ export class AuthService {
   register(user: RegisterRequest) {
     let api = `${this.endpoint}/register`;
     console.log(user);
-    return this.http.post(api, user).subscribe({
-      next:(res)=>this.router.navigateByUrl('/checkemail'),
-      error: this.handleError.bind(this) //
+    return this.http.post<any>(api, user).subscribe({
+      next:(res)=>{
+        this.toastrService.success(res.message);
+        this.router.navigateByUrl('/login')
+      },
+      error:(err) => {
+        this.toastrService.error("This email is already associated with an account");
+        this.handleError.bind(this)
+      ;} //
    });
   }
   // Sign-in
   login(user: LoginRequest) {
     return this.http
       .post<any>(`${this.endpoint}/login`, user)
-      .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.token);
-        localStorage.setItem('first-name', res.firstName);
-        localStorage.setItem('last-name', res.lastName);
-        this.navigate();
-      }
-      );
+      .subscribe({
+        next: (res) => {
+          localStorage.setItem('access_token', res.token);
+          localStorage.setItem('first-name', res.firstName);
+          localStorage.setItem('last-name', res.lastName);
+          this.toastrService.success(res.message);
+          this.navigate();
+        },
+        error: (err) => {
+          this.toastrService.error("An error occurred");
+
+        }
+      });
   }
+
   navigate(){
     if (this.getRole() == 'PASSENGER')
       this.router.navigateByUrl('/user');
@@ -57,18 +71,25 @@ export class AuthService {
     else if (this.getRole() == 'ADMIN')
       this.router.navigateByUrl('/admin');
   }
+
   forgotPassword(forgotPasswordRequest:ForgotPasswordRequest){
-    return this.http.post<string>(`${this.endpoint}/forgot-password`,forgotPasswordRequest)
-      .subscribe(res =>{
-        console.log(res);
-    });
+    return this.http.post<any>(`${this.endpoint}/forgot-password`,forgotPasswordRequest)
+      .subscribe({
+      next :(res) =>{         this.toastrService.success(res.message)},
+        error: (err) => {
+          this.toastrService.error("An error occurred");
+        }    });
   }
   resetPassword(resetToken:string,resetPasswordRequest:ResetPasswordRequest){
     return this.http.patch<any>(`${this.endpoint}/reset-password/${resetToken}`,resetPasswordRequest)
-      .subscribe(res =>{
-        this.router.navigateByUrl('/login');
-        console.log(res);
-      });
+      .subscribe({
+        next :(res) =>{
+          this.router.navigateByUrl('/login');
+          console.log(res);
+        },
+        error: (err) => {
+          this.toastrService.error("An error occurred");
+        }    });
   }
   getToken() {
     return localStorage.getItem('access_token');
