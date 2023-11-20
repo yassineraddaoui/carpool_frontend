@@ -79,7 +79,6 @@ export class AuthService {
     console.log(this.getRoles())
     if (this.getRoles().indexOf('PASSENGER') !=-1)
       this.router.navigateByUrl('/user');
-
     else if (this.getRoles().indexOf('DRIVER')!=-1)
       this.router.navigateByUrl('/driver');
     else if (this.getRoles().indexOf('ADMIN')!=-1)
