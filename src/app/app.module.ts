@@ -14,7 +14,8 @@ import { CheckEmailComponent } from './components/auth/check-email/check-email.c
 import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 import {ForgotPasswordComponent} from "./components/auth/forgot-password/forgot-password.component";
 import {ToastrModule} from "ngx-toastr";
-import { HeaderComponent } from './components/layout/header/header.component'; // Import ReactiveFormsModule
+import { HeaderComponent } from './components/layout/header/header.component';
+import { FooterComponent } from './components/layout/footer/footer.component'; // Import ReactiveFormsModule
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { HeaderComponent } from './components/layout/header/header.component'; /
     ResetPasswordComponent,
     ForgotPasswordComponent,
     HeaderComponent,
+    FooterComponent,
 
   ],
   imports: [
