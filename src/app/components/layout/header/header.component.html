@@ -73,13 +73,6 @@
                                         </div>
                                         <ul>
                                             <li><a routerLink="/">My Profile</a></li>
-                                            <li>
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input" type="checkbox" id="mode_switch"
-                                                        checked>
-                                                    <label class="form-check-label" for="mode_switch">Night Mode</label>
-                                                </div>
-                                            </li>
                                         </ul>
                                         <div class="text-center">
                                             <a href="#" class="cs-btn cs-style1"><span>Logout</span></a>
@@ -92,6 +85,10 @@
                     <ng-template #showSignInButton>
                         <a href="/login" class="cs-btn cs-style1"><span>Sign In</span></a>
                     </ng-template>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="mode_switch" checked>
+                        <label class="form-check-label" for="mode_switch">Night Mode</label>
+                    </div>
                 </div>
             </div>
         </div>
