@@ -86,7 +86,8 @@
                         <a href="/login" class="cs-btn cs-style1"><span>Sign In</span></a>
                     </ng-template>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="mode_switch" checked>
+                        <input class="form-check-input" type="checkbox" id="mode_switch"
+                            [checked]="darkModeService.getIsDarkMode()" (change)="toggleDarkMode()">
                         <label class="form-check-label" for="mode_switch">Night Mode</label>
                     </div>
                 </div>

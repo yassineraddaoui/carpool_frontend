@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body class="mat-typography cs-dark">
+<body [class.cs-dark]="darkModeService.isDarkMode" class="mat-typography">
   <div class="cs-preloader cs-center">
     <div class="cs-preloader_in"></div>
     <span>TEKUP-CARPOOL</span>
