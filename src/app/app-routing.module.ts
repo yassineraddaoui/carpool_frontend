@@ -7,12 +7,16 @@ import { DriverDashboardComponent } from './components/driver/driverDashboard/dr
 import { AuthGuard } from './guards/Auth-guard';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
-import { CheckEmailComponent } from './components/shareed/CheckEmail/check-email/check-email.component';
+import { CheckEmailComponent } from './components/auth/check-email/check-email.component';
+import {ForgotPasswordComponent} from "./components/auth/forgot-password/forgot-password.component";
+import {ResetPasswordComponent} from "./components/auth/reset-password/reset-password.component";
 
 const routes: Routes = [
   { path: 'login',component:LoginComponent},
   { path: 'register',component:RegisterComponent},
-  {path:'checkemail',component:CheckEmailComponent},
+  {path:'check-email/:email',component:CheckEmailComponent},
+  {path:'forgot-password',component:ForgotPasswordComponent},
+  {path:'reset-password/:token',component:ResetPasswordComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'admin', component: AdminDashboardComponent,

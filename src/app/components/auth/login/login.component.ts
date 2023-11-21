@@ -14,13 +14,20 @@ export class LoginComponent implements OnInit {
   userForm!: FormGroup;
 
   ngOnInit() {
-    this.userForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    });
+    if (this.authservice.getToken()!= null)
+      this.authservice.navigate();
+
+      this.userForm = this.formBuilder.group({
+        email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+        password: ['', Validators.required]
+      });
+
   }
-  
+
   onLogin(){
+    if (this.userForm.invalid) {
+      return;
+    }
     this.authservice.login(new LoginRequest(this.userForm.value['email'],this.userForm.value['password']));
   }
 

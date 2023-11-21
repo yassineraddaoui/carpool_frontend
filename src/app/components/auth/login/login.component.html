@@ -9,5 +9,5 @@
         <input type="password" class="form-control" id="password" formControlName="password">
         </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button [disabled]="!userForm.valid" type="submit" class="btn btn-primary">Submit</button>
 </form>
