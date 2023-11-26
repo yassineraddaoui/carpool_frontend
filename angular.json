@@ -28,9 +28,16 @@
               "node_modules/ngx-toastr/toastr.css",
               "src/custom-theme.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/plugins/fontawesome.min.css",
+              "src/assets/css/plugins/slick.css",
+              "src/assets/css/style.css",
               "src/styles.css"
             ],
             "scripts": [
+              "src/assets/js/plugins/jquery.min.js",
+              "src/assets/js/plugins/isotope.pkg.min.js",
+              "src/assets/js/plugins/jquery.slick.min.js",
+              "src/assets/js/main.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },

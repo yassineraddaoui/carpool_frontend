@@ -1,0 +1,98 @@
+<!-- Start Header Section -->
+<header class="cs-site_header cs-style1 cs-sticky-header cs-white_bg">
+    <div class="cs-main_header">
+        <div class="container-fluid">
+            <div class="cs-main_header_in">
+                <div class="cs-main_header_left">
+                    <a class="cs-site_branding" routerLink="/"><img src="/assets/img/logo_resize.png" alt="Logo"></a>
+                </div>
+                <div class="cs-main_header_right">
+                    <div class="cs-nav_wrap">
+                        <div class="cs-nav_out">
+                            <div class="cs-nav_in">
+                                <div class="cs-nav">
+                                    <ul class="cs-nav_list">
+                                        <li>
+                                            <a routerLink="/">Home</a>
+                                        </li>
+                                        <li>
+                                            <a routerLink="/">Explore</a>
+                                        </li>
+                                        <li><a routerLink="/">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cs-search_wrap">
+                        <form action="#" class="cs-search">
+                            <input type="text" class="cs-search_input" placeholder="Search for your destination">
+                            <button class="cs-search_btn">
+                                <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M9.16667 16.3333C12.8486 16.3333 15.8333 13.3486 15.8333 9.66667C15.8333 5.98477 12.8486 3 9.16667 3C5.48477 3 2.5 5.98477 2.5 9.66667C2.5 13.3486 5.48477 16.3333 9.16667 16.3333Z"
+                                        stroke="currentColor" stroke-opacity="0.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M17.5 18L13.875 14.375" stroke="currentColor" stroke-opacity="0.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                    <ng-container *ngIf="authService.isLoggedIn; else showSignInButton">
+                        <div class="cs-header_btns_wrap">
+                            <div class="cs-header_btns">
+                                <div class="cs-header_icon_btn cs-center cs-mobile_search_toggle">
+                                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M9.16667 16.3333C12.8486 16.3333 15.8333 13.3486 15.8333 9.66667C15.8333 5.98477 12.8486 3 9.16667 3C5.48477 3 2.5 5.98477 2.5 9.66667C2.5 13.3486 5.48477 16.3333 9.16667 16.3333Z"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M17.5 18L13.875 14.375" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <div class="cs-toggle_box cs-profile_box">
+                                    <div class="cs-toggle_btn cs-header_icon_btn cs-center">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M15.5 15.75V14.25C15.5 13.4544 15.1839 12.6913 14.6213 12.1287C14.0587 11.5661 13.2956 11.25 12.5 11.25H6.5C5.70435 11.25 4.94129 11.5661 4.37868 12.1287C3.81607 12.6913 3.5 13.4544 3.5 14.25V15.75"
+                                                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path
+                                                d="M9.5 8.25C11.1569 8.25 12.5 6.90685 12.5 5.25C12.5 3.59315 11.1569 2.25 9.5 2.25C7.84315 2.25 6.5 3.59315 6.5 5.25C6.5 6.90685 7.84315 8.25 9.5 8.25Z"
+                                                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="cs-toggle_body">
+                                        <div class="cs-user_info">
+                                            <h3 class="cs-user_name">Hamadi Chlabe9</h3>
+                                            <div class="cs-user_profile_link">
+                                            </div>
+                                        </div>
+                                        <ul>
+                                            <li><a routerLink="/">My Profile</a></li>
+                                        </ul>
+                                        <div class="text-center">
+                                            <a href="#" class="cs-btn cs-style1"><span>Logout</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-template #showSignInButton>
+                        <a href="/login" class="cs-btn cs-style1"><span>Sign In</span></a>
+                    </ng-template>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="mode_switch"
+                            [checked]="darkModeService.getIsDarkMode()" (change)="toggleDarkMode()">
+                        <label class="form-check-label" for="mode_switch">Night Mode</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- End Header Section -->
